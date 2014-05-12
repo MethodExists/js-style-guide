@@ -48,8 +48,6 @@ your editor supports that, right?
 
 ## Use double quotes
 
-Use double quotes, unless you are writing JSON.
-
 *Right:*
 
 ```js
@@ -77,7 +75,9 @@ if (true)
 }
 ```
 
-Also, notice the use of whitespace before and after the condition statement:
+## Spacing
+
+### Spacing around curly braces:
 
 *Wrong:*
 
@@ -107,6 +107,20 @@ if( !_.isFalsey(profile) ) {
 
 ```
 
+### Spacing around parentheses ( ):
+
+If condition inside if, switch or elsewhere is rather simple, no spaces required. Spaces right after ( and before ) are required for more complex conditions:
+
+```js
+if(param) {
+  something;
+}
+
+// or:
+if( param && !yetSet ) {
+  somethingElse;
+}
+```
 
 ## Variable definition blocks
 
@@ -118,7 +132,7 @@ Here are some examples:
 ```js
 
 var lib = require("./lib"),
-    _ = require("platform2/shared/functional”);
+    _ = require("platform2/shared/functional");
 ```
 
 Do NOT line up = signs 
@@ -128,7 +142,7 @@ Do NOT add extra spaces after var
 *Wrong:*
 
 ```js
-var   _               = require("platform2/shared/functional”),
+var   _               = require("platform2/shared/functional"),
       saveProfile     = require("./saveProfile");
 
 ```
@@ -142,13 +156,13 @@ abbreviations should generally be avoided.
 *Right:*
 
 ```js
-var adminUser = db.query('SELECT * FROM users ...');
+var adminUser = db.query("SELECT * FROM users ...");
 ```
 
 *Wrong:*
 
 ```js
-var admin_user = db.query('SELECT * FROM users ...');
+var admin_user = db.query("SELECT * FROM users ...");
 ```
 
 ## Use UpperCamelCase for class names
@@ -208,10 +222,10 @@ keys when your interpreter complains:
 *Right:*
 
 ```js
-var a = ['hello', 'world'];
+var a = ["hello", "world"];
 var b = {
-  good: 'code',
-  'is generally': 'pretty',
+  good: "code",
+  "is generally": "pretty",
 };
 ```
 
@@ -219,9 +233,9 @@ var b = {
 
 ```js
 var a = [
-  'hello', 'world'
+  "hello", "world"
 ];
-var b = {"good": 'code'
+var b = {"good": "code"
         , is generally: 'pretty'
         };
 ```
@@ -261,7 +275,7 @@ be forever grateful.
 ```js
 var a = [];
 if (!a.length) {
-  console.log('winning');
+  console.log("winning");
 }
 ```
 
@@ -288,7 +302,7 @@ Any non-trivial conditions should be assigned to a descriptively named variable 
 var isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
 
 if (isValidPassword) {
-  console.log('winning');
+  console.log("winning");
 }
 ```
 
@@ -296,7 +310,7 @@ if (isValidPassword) {
 
 ```js
 if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
-  console.log('losing');
+  console.log("losing");
 }
 ```
 
@@ -361,16 +375,16 @@ will produce better stack traces, heap and cpu profiles.
 *Right:*
 
 ```js
-req.on('end', function onEnd() {
-  console.log('winning');
+req.on("end", function onEnd() {
+  console.log("winning");
 });
 ```
 
 *Wrong:*
 
 ```js
-req.on('end', function() {
-  console.log('losing');
+req.on("end", function() {
+  console.log("losing");
 });
 ```
 
@@ -386,7 +400,7 @@ setTimeout(function() {
 }, 1000);
 
 function afterConnect() {
-  console.log('winning');
+  console.log("winning");
 }
 ```
 
@@ -395,7 +409,7 @@ function afterConnect() {
 ```js
 setTimeout(function() {
   client.connect(function() {
-    console.log('losing');
+    console.log("losing");
   });
 }, 1000);
 ```
@@ -450,7 +464,7 @@ Try to describe easily what's happening in a condensed standalone block, but do 
 
 ```js
 //if there is username and password, concatenate it to connectin string
-cn += (config.username && config.password) ? (config.username + ':' + config.password + "@") : "";
+cn += (config.username && config.password) ? (config.username + ":" + config.password + "@") : "";
 
 var getCollection = function(entity) {
   //return a collection
