@@ -402,7 +402,75 @@ setTimeout(function() {
 
 ## Commenting
 
-To Be Added
+Use markdown multiline comments to describe major function or module:
+
+```js
+/*
+# viewActions
+A lib for use in view.
+View actions can be used in view events.
+
+## Exports
+{
+
+## Todo
+- Create the remove() function for removing items from arrays
+
+*/
+```
+
+Use double slashes otherwise:
+
+*Wrong:*
+```js
+var self = this;
+  /*
+    We can pass another validator instead of schemata
+  */
+  
+schemataValidator.build = function(dataModel){
+    /* Build Actual schema Object */
+```
+
+*Right:*
+
+```js
+      // copy context params to params key in viewConf
+      viewConf.params = {};
+      for(var paramKey in context.params) {
+        if(!viewConf.params[paramKey] && _.isString(paramKey)) {
+          viewConf.params[paramKey] = context.params[paramKey];
+        }
+      }
+```
+
+Try to describe easily what's happening in a condensed standalone block, but do not state obvious things:
+
+*Wrong:*
+
+```js
+//if there is username and password, concatenate it to connectin string
+cn += (config.username && config.password) ? (config.username + ':' + config.password + "@") : "";
+
+var getCollection = function(entity) {
+  //return a collection
+  return _db.collection(entity);
+};
+  
+```
+
+No creative comment banners:
+
+*Wrong:*
+```js
+
+  /**************************************************************************
+   * ======      Functions
+   **************************************************************************/
+
+  // Main Process ==============================
+```
+
 
 ## Chaining
 Put dots in the ends of the lines, not at the beginning! 
