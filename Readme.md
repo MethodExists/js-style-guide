@@ -15,6 +15,7 @@ according to your preferences.
 
 Use 2 spaces for indenting your code and swear an oath to never mix tabs and
 spaces - a special kind of hell is awaiting you otherwise.
+No Exceptions.
 
 ## Newlines
 
@@ -43,17 +44,11 @@ Limit your lines to 80 characters. Yes, screens have gotten much bigger over the
 last few years, but your brain has not. Use the additional room for split screen,
 your editor supports that, right?
 
-## Use single quotes
+## Use double quotes
 
 Use single quotes, unless you are writing JSON.
 
 *Right:*
-
-```js
-var foo = 'bar';
-```
-
-*Wrong:*
 
 ```js
 var foo = "bar";
@@ -82,41 +77,28 @@ if (true)
 
 Also, notice the use of whitespace before and after the condition statement.
 
-## Declare one variable per var statement
+## Variable definition blocks
 
-Declare one variable per var statement, it makes it easier to re-order the
-lines. However, ignore [Crockford][crockfordconvention] when it comes to
-declaring variables deeper inside a function, just the declarations wherever
-they make sense.
+You can make var statement with multiple var once per closure or module, on top of it.
+Here are some examples:
 
 *Right:*
 
 ```js
-var keys   = ['foo', 'bar'];
-var values = [23, 42];
 
-var object = {};
-while (keys.length) {
-  var key = keys.pop();
-  object[key] = values.pop();
-}
+var lib = require("./lib"),
+    _ = require("platform2/shared/functional”);
 ```
 
+Do NOT line up = signs 
+Do NOT add extra spaces after var
 *Wrong:*
 
 ```js
-var keys = ['foo', 'bar'],
-    values = [23, 42],
-    object = {},
-    key;
+var   _               = require("platform2/shared/functional”),
+      saveProfile     = require("./saveProfile");
 
-while (keys.length) {
-  key = keys.pop();
-  object[key] = values.pop();
-}
 ```
-
-[crockfordconvention]: http://javascript.crockford.com/code.html
 
 ## Use lowerCamelCase for variables, properties and function names
 
@@ -211,47 +193,28 @@ var b = {"good": 'code'
         };
 ```
 
-## Use the === operator
+*Avoid excessive spacing:*
 
-Programming is not about remembering [stupid rules][comparisonoperators]. Use
-the triple equality operator as it will work just as expected.
+```
+return _.keys.all({
+
+  categories: categories
+
+});
+```
+
+## Proper use of ternary operator
+
+The ternary operator can be used on a single line if very simple. 
+Otherwise, split it up into multiple lines instead.
 
 *Right:*
 
 ```js
-var a = 0;
-if (a !== '') {
-  console.log('winning');
-}
-
-```
-
-*Wrong:*
-
-```js
-var a = 0;
-if (a == '') {
-  console.log('losing');
-}
-```
-
-[comparisonoperators]: https://developer.mozilla.org/en/JavaScript/Reference/Operators/Comparison_Operators
-
-## Use multi-line ternary operator
-
-The ternary operator should not be used on a single line. Split it up into multiple lines instead.
-
-*Right:*
-
-```js
-var foo = (a === b)
-  ? 1
-  : 2;
-```
-
-*Wrong:*
-
-```js
+var foo = (a === b) ? 
+  long_expression : 
+  another_long_expression;
+// or:
 var foo = (a === b) ? 1 : 2;
 ```
 
@@ -404,60 +367,66 @@ setTimeout(function() {
 }, 1000);
 ```
 
-## Use slashes for comments
+## Commenting
 
-Use slashes for both single line and multi line comments. Try to write
-comments that explain higher level mechanisms or clarify difficult
-segments of your code. Don't use comments to restate trivial things.
 
-*Right:*
-
-```js
-// 'ID_SOMETHING=VALUE' -> ['ID_SOMETHING=VALUE'', 'SOMETHING', 'VALUE']
-var matches = item.match(/ID_([^\n]+)=([^\n]+)/));
-
-// This function has a nasty side effect where a failure to increment a
-// redis counter used for statistics will cause an exception. This needs
-// to be fixed in a later iteration.
-function loadUser(id, cb) {
-  // ...
-}
-
-var isSessionValid = (session.expires < Date.now());
-if (isSessionValid) {
-  // ...
-}
-```
+## Chaining
+Put dots in the ends of the lines, not at the beginning! 
 
 *Wrong:*
 
 ```js
-// Execute a regex
-var matches = item.match(/ID_([^\n]+)=([^\n]+)/));
-
-// Usage: loadUser(5, function() { ... })
-function loadUser(id, cb) {
-  // ...
-}
-
-// Check if the session is valid
-var isSessionValid = (session.expires < Date.now());
-// If the session is valid
-if (isSessionValid) {
-  // ...
-}
+return app.repo
+    .select("fc_document")
+    .filter({
+      review_date: { ne: "" },
+      owner: session.profile._id
+    })
+    .run();
 ```
 
-## Object.freeze, Object.preventExtensions, Object.seal, with, eval
+*Right:*
 
-Crazy shit that you will probably never need. Stay away from it.
+```js
+return app.repo.
+    select("fc_document").
+    filter({
+      review_date: { ne: "" },
+      owner: session.profile._id
+    }).
+    run();
+```
 
-## Getters and setters
+### Splitting long chained lines
+Splitting is allowed. Try to balance the lines, so that the beginning makes sense 
 
-Do not use setters, they cause more problems for people who try to use your
-software than they can solve.
+*Wrong:*
+```js
+// app is left meaningless:
 
-Feel free to use getters that are free from [side effects][sideeffect], like
-providing a length property for a collection class.
+directories: app.
+      apiServer.callDataView("filingCabinetDirectoryDataView", params, session), 
+```
 
-[sideeffect]: http://en.wikipedia.org/wiki/Side_effect_(computer_science)
+*Right:*
+```js
+directories: app.apiServer.
+      callDataView("filingCabinetDirectoryDataView", params, session),
+```
+
+After the first next line and tab all the consequent chaining must be done on new line:
+
+*Wrong:*
+```js
+app.repo.
+    select("fc_document”).filter({ }).
+    run();
+``` 
+
+*Right:*
+```js
+app.repo.
+    select("fc_document").
+    filter({ }).
+    run();
+```
