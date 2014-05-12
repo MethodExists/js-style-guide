@@ -75,7 +75,36 @@ if (true)
 }
 ```
 
-Also, notice the use of whitespace before and after the condition statement.
+Also, notice the use of whitespace before and after the condition statement:
+
+*Wrong:*
+
+```js
+}catch(err){
+
+try{
+
+return function(params, session){
+
+if(!_.isFalsey(profile)){
+
+}else{
+```
+
+*Right:*
+```js
+} catch(err) {
+
+try {
+
+return function(params, session) {
+
+if( !_.isFalsey(profile) ) { 
+
+} else {
+
+```
+
 
 ## Variable definition blocks
 
