@@ -48,7 +48,7 @@ your editor supports that, right?
 
 ## Use double quotes
 
-Use single quotes, unless you are writing JSON.
+Use double quotes, unless you are writing JSON.
 
 *Right:*
 
