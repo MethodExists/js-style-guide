@@ -1,4 +1,4 @@
-# Node.js Style Guide
+# Javascript Style Guide
 
 This is a guide for writing consistent and aesthetically pleasing node.js code.
 It is inspired by what is popular within the community, and flavored with some
@@ -8,6 +8,8 @@ This guide was created by [Felix Geisendörfer](http://felixge.de/) and is
 licensed under the [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
 license. You are encouraged to fork this repository and make adjustments
 according to your preferences.
+
+This version is updated by Mark Sergienko for use within MethodExists Inc.
 
 ![Creative Commons License](http://i.creativecommons.org/l/by-sa/3.0/88x31.png)
 
@@ -120,7 +122,9 @@ var lib = require("./lib"),
 ```
 
 Do NOT line up = signs 
+
 Do NOT add extra spaces after var
+
 *Wrong:*
 
 ```js
