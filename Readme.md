@@ -62,7 +62,7 @@ Your opening braces go on the same line as the statement.
 
 ```js
 if (true) {
-  console.log('winning');
+  console.log("winning");
 }
 ```
 
@@ -71,7 +71,7 @@ if (true) {
 ```js
 if (true)
 {
-  console.log('losing');
+  console.log("losing");
 }
 ```
 
