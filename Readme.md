@@ -61,7 +61,7 @@ Your opening braces go on the same line as the statement.
 *Right:*
 
 ```js
-if (true) {
+if(true) {
   console.log("winning");
 }
 ```
@@ -69,7 +69,7 @@ if (true) {
 *Wrong:*
 
 ```js
-if (true)
+if(true)
 {
   console.log("losing");
 }
@@ -274,7 +274,7 @@ be forever grateful.
 
 ```js
 var a = [];
-if (!a.length) {
+if(!a.length) {
   console.log("winning");
 }
 ```
@@ -301,7 +301,7 @@ Any non-trivial conditions should be assigned to a descriptively named variable 
 ```js
 var isValidPassword = password.length >= 4 && /^(?=.*\d).{4,}$/.test(password);
 
-if (isValidPassword) {
+if(isValidPassword) {
   console.log("winning");
 }
 ```
@@ -309,7 +309,7 @@ if (isValidPassword) {
 *Wrong:*
 
 ```js
-if (password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
+if(password.length >= 4 && /^(?=.*\d).{4,}$/.test(password)) {
   console.log("losing");
 }
 ```
@@ -329,11 +329,11 @@ as possible.
 
 ```js
 function isPercentage(val) {
-  if (val < 0) {
+  if(val < 0) {
     return false;
   }
 
-  if (val > 100) {
+  if(val > 100) {
     return false;
   }
 
@@ -395,7 +395,7 @@ Use closures, but don't nest them. Otherwise your code will become a mess.
 *Right:*
 
 ```js
-setTimeout(function() {
+setTimeout(function connect() {
   client.connect(afterConnect);
 }, 1000);
 
